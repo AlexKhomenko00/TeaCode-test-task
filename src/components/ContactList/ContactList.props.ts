@@ -1,5 +1,6 @@
 import { IContact } from "interfaces/contact";
 
-export interface ContactItemProps extends IContact {
+export interface ContactListProps {
 	contacts: IContact[];
+	onToggleContact?(id: number): void;
 }
