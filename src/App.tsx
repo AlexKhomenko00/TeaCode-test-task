@@ -50,10 +50,11 @@ const App = () => {
 
 	const [filterValue, setFilterValue] = useState("");
 
-	const filteredContacts = contacts.filter(
-		(contact) =>
-			contact.first_name.toLowerCase().includes(filterValue.toLowerCase()) ||
-			contact.last_name.toLowerCase().includes(filterValue.toLowerCase())
+	const filteredContacts = contacts.filter((contact) =>
+		(contact.first_name + " " + contact.last_name)
+			.toLowerCase()
+			.trim()
+			.includes(filterValue.toLowerCase().trim())
 	);
 
 	if (isLoading) return <MainLoder />;
