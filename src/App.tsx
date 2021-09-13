@@ -61,7 +61,7 @@ const App = () => {
 
 	return (
 		<div className={s.app} data-testid="appComponent">
-			<Filter onChangeFilter={setFilterValue} className={s.filter} />
+			<Filter className={s.filter} onChangeFilter={setFilterValue} />
 
 			<Pagination
 				className={s.pagination}
