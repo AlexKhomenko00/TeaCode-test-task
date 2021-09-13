@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { getContactList } from "api/contact";
+import { sortContactsByLastName } from "helpers";
 
 import { IContact } from "interfaces/contact";
 
@@ -16,13 +17,22 @@ const App = () => {
 		const fetchAndSetContacts = async () => {
 			const fetchedContacts = await getContactList();
 
+			const sortedContacts = sortContactsByLastName(fetchedContacts);
+
 			setContacts(
-				fetchedContacts.map((contact) => ({ ...contact, checked: false }))
+				sortedContacts.map((contact) => ({ ...contact, checked: false }))
 			);
 		};
 
 		fetchAndSetContacts();
 	}, []);
+
+	const handleToggleContact = (id: number) => {
+		setContacts((prevContacts) =>
+			prevContacts.map((c) => (c.id === id ? { ...c, checked: !c.checked } : c))
+		);
+		console.log("Checked contact ID:", id);
+	};
 
 	const [filterValue, setFilterValue] = useState("");
 
@@ -36,7 +46,10 @@ const App = () => {
 		<div className={s.app}>
 			<Filter onChangeFilter={setFilterValue} className={s.filter} />
 
-			<ContactList contacts={filteredContacts} />
+			<ContactList
+				contacts={filteredContacts}
+				onToggleContact={handleToggleContact}
+			/>
 		</div>
 	);
 };
