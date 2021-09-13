@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 
 import { getContactList } from "api/contact";
 import { sortContactsByLastName } from "helpers";
+import { PER_PAGE_COUNT } from "./constants";
 
 import { IContact } from "interfaces/contact";
 
+import { Pagination } from "@material-ui/lab";
 import ContactList from "components/ContactList/ContactList";
 import Filter from "components/Filter/Filter";
 
@@ -34,6 +36,15 @@ const App = () => {
 		console.log("Checked contact ID:", id);
 	};
 
+	const [page, setPage] = useState(0);
+
+	const handleChangePage = (
+		event: React.ChangeEvent<unknown>,
+		value: number
+	) => {
+		setPage(value);
+	};
+
 	const [filterValue, setFilterValue] = useState("");
 
 	const filteredContacts = contacts.filter(
@@ -45,6 +56,13 @@ const App = () => {
 	return (
 		<div className={s.app}>
 			<Filter onChangeFilter={setFilterValue} className={s.filter} />
+
+			<Pagination
+				className={s.pagination}
+				count={filteredContacts.length / PER_PAGE_COUNT}
+				onChange={handleChangePage}
+				page={page}
+			/>
 
 			<ContactList
 				contacts={filteredContacts}
