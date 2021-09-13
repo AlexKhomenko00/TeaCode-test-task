@@ -13,6 +13,7 @@ const ContactItem = ({
 	avatar,
 	email,
 	checked,
+
 	onToggleContact,
 }: ContactItemProps): JSX.Element => {
 	const labelId = `checkbox-list-secondary-label-${id}`;
@@ -21,6 +22,7 @@ const ContactItem = ({
 		<ListItem
 			key={id}
 			button
+			data-testid="contactItem"
 			selected={checked}
 			onClick={() => onToggleContact && onToggleContact(id)}
 		>

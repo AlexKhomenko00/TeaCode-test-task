@@ -5,8 +5,6 @@ import { ContactListProps } from "./ContactList.props";
 import List from "@material-ui/core/List";
 import ContactItem from "./ContactItem/ContactItem";
 
-import s from "./ContactList.module.css";
-
 const ContactList = ({
 	contacts,
 	onToggleContact,

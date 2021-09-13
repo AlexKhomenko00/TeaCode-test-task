@@ -60,7 +60,7 @@ const App = () => {
 	if (isLoading) return <MainLoder />;
 
 	return (
-		<div className={s.app}>
+		<div className={s.app} data-testid="appComponent">
 			<Filter onChangeFilter={setFilterValue} className={s.filter} />
 
 			<Pagination
