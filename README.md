@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Demo Page
+
+[Netlify Demo Page](https://teacode-test-task.netlify.app/).
+
 ## Available Scripts
 
 In the project directory, you can run:
