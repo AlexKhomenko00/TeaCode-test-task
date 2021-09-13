@@ -11,8 +11,10 @@ import ContactList from "components/ContactList/ContactList";
 import Filter from "components/Filter/Filter";
 
 import s from "./App.module.css";
+import MainLoder from "components/MainLoader/MainLoder";
 
 const App = () => {
+	const [isLoading, setIsLoading] = useState(true);
 	const [contacts, setContacts] = useState<IContact[]>([]);
 
 	useEffect(() => {
@@ -24,6 +26,7 @@ const App = () => {
 			setContacts(
 				sortedContacts.map((contact) => ({ ...contact, checked: false }))
 			);
+			setIsLoading(false);
 		};
 
 		fetchAndSetContacts();
@@ -53,6 +56,8 @@ const App = () => {
 			contact.last_name.toLowerCase().includes(filterValue.toLowerCase())
 	);
 
+	if (isLoading) return <MainLoder />;
+
 	return (
 		<div className={s.app}>
 			<Filter onChangeFilter={setFilterValue} className={s.filter} />
@@ -65,7 +70,7 @@ const App = () => {
 			/>
 
 			<ContactList
-				contacts={filteredContacts}
+				contacts={filteredContacts.splice(page, PER_PAGE_COUNT)}
 				onToggleContact={handleToggleContact}
 			/>
 		</div>
